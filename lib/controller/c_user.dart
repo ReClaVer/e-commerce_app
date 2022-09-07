@@ -5,8 +5,7 @@ import 'package:get/get.dart';
 class CUser extends GetxController {
   Rx<User> _user = User(0, '', '', '').obs;
 
-  get user => _user.value;
-  setUser(User? newUser) => _user.value = newUser!;
+  User get user => _user.value;
 
   void _getUser() async {
     User? user = await EventPref.getUser();

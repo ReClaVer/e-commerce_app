@@ -1,18 +1,89 @@
+import 'dart:convert';
+
+import 'package:ecommerce_app/config/api.dart';
 import 'package:ecommerce_app/controller/c_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
 import '../config/asset.dart';
 import '../controller/c_user.dart';
 import '../model/apparel.dart';
 
-class DetaiApparel extends StatelessWidget {
+class DetaiApparel extends StatefulWidget {
   final Apparel? apparel;
   DetaiApparel({this.apparel});
 
-  final _CDetailShoes = Get.put(CDetailApparel());
+  @override
+  State<DetaiApparel> createState() => _DetaiApparelState();
+}
+
+class _DetaiApparelState extends State<DetaiApparel> {
+  final _CDetailApparel = Get.put(CDetailApparel());
+
   final _CUser = Get.put(CUser());
+
+  void checkWishlist() async {
+    try {
+      var response = await http.post(Uri.parse(Api.checkWishlist), body: {
+        'id_user': _CUser.user.idUser.toString(),
+        'id_apparel': widget.apparel!.idApparel.toString()
+      });
+
+      if (response.statusCode == 200) {
+        var responseBody = jsonDecode(response.body);
+        _CDetailApparel.setIsWishlist(responseBody['exist']);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void addWishlist() async {
+    try {
+      var response = await http.post(Uri.parse(Api.addWishlist), body: {
+        'id_user': _CUser.user.idUser.toString(),
+        'id_apparel': widget.apparel!.idApparel.toString()
+      });
+
+      if (response.statusCode == 200) {
+        var responseBody = jsonDecode(response.body);
+        if (responseBody['success']) {
+          checkWishlist();
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void deleteWishlist() async {
+    try {
+      var response = await http.post(Uri.parse(Api.deleteWishlist), body: {
+        'id_user': _CUser.user.idUser.toString(),
+        'id_apparel': widget.apparel!.idApparel.toString()
+      });
+
+      if (response.statusCode == 200) {
+        var responseBody = jsonDecode(response.body);
+        if (responseBody['success']) {
+          checkWishlist();
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    checkWishlist();
+    _CDetailApparel.setQuantity(1);
+    _CDetailApparel.setSize(0);
+    _CDetailApparel.setColor(0);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +94,7 @@ class DetaiApparel extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
           placeholder: AssetImage(Asset.imageBox),
-          image: NetworkImage(apparel!.image),
+          image: NetworkImage(widget.apparel!.image),
           imageErrorBuilder: (context, error, stackTrace) {
             return Center(
               child: Icon(Icons.broken_image),
@@ -52,10 +123,16 @@ class DetaiApparel extends StatelessWidget {
                 Obx(
                   () => IconButton(
                       onPressed: () {
-                        _CDetailShoes.setIsWishlist(!_CDetailShoes.isWishlist);
+                        if (_CDetailApparel.isWishlist) {
+                          deleteWishlist();
+                        } else {
+                          addWishlist();
+                        }
+                        // _CDetailApparel.setIsWishlist(
+                        //     !_CDetailApparel.isWishlist);
                       },
                       icon: Icon(
-                          _CDetailShoes.isWishlist
+                          _CDetailApparel.isWishlist
                               ? Icons.bookmark
                               : Icons.bookmark_border,
                           color: Asset.colorPrimary)),
@@ -109,7 +186,7 @@ class DetaiApparel extends StatelessWidget {
               height: 30,
             ),
             Text(
-              apparel!.name,
+              widget.apparel!.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -130,7 +207,7 @@ class DetaiApparel extends StatelessWidget {
                     Row(
                       children: [
                         RatingBar.builder(
-                          initialRating: apparel!.rating,
+                          initialRating: widget.apparel!.rating,
                           minRating: 1,
                           direction: Axis.horizontal,
                           allowHalfRating: true,
@@ -148,14 +225,14 @@ class DetaiApparel extends StatelessWidget {
                         SizedBox(
                           width: 8,
                         ),
-                        Text('(${apparel!.rating})')
+                        Text('(${widget.apparel!.rating})')
                       ],
                     ),
                     SizedBox(
                       height: 8,
                     ),
                     Text(
-                      apparel!.tags!.join(', '),
+                      widget.apparel!.tags!.join(', '),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -166,7 +243,7 @@ class DetaiApparel extends StatelessWidget {
                       height: 16,
                     ),
                     Text(
-                      'Rp ${apparel!.price}',
+                      'Rp ${widget.apparel!.price}',
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 20,
@@ -181,12 +258,12 @@ class DetaiApparel extends StatelessWidget {
                       children: [
                         IconButton(
                             onPressed: () {
-                              _CDetailShoes.setQuantity(
-                                  _CDetailShoes.quantity + 1);
+                              _CDetailApparel.setQuantity(
+                                  _CDetailApparel.quantity + 1);
                             },
                             icon: Icon(Icons.add_circle_outline_rounded)),
                         Text(
-                          _CDetailShoes.quantity.toString(),
+                          _CDetailApparel.quantity.toString(),
                           style: TextStyle(
                             fontSize: 12,
                             color: Asset.colorPrimary,
@@ -195,9 +272,9 @@ class DetaiApparel extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {
-                              if (_CDetailShoes.quantity - 1 >= 1) {
-                                _CDetailShoes.setQuantity(
-                                    _CDetailShoes.quantity - 1);
+                              if (_CDetailApparel.quantity - 1 >= 1) {
+                                _CDetailApparel.setQuantity(
+                                    _CDetailApparel.quantity - 1);
                               }
                             },
                             icon: Icon(Icons.remove_circle_outline_outlined))
@@ -218,9 +295,9 @@ class DetaiApparel extends StatelessWidget {
             ),
             Wrap(
               spacing: 8,
-              children: List.generate(apparel!.sizes.length, (index) {
+              children: List.generate(widget.apparel!.sizes.length, (index) {
                 return Obx(() => GestureDetector(
-                      onTap: () => _CDetailShoes.setSize(index),
+                      onTap: () => _CDetailApparel.setSize(index),
                       child: Container(
                         height: 35,
                         width: 35,
@@ -228,16 +305,16 @@ class DetaiApparel extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
                               width: 2,
-                              color: _CDetailShoes.size == index
+                              color: _CDetailApparel.size == index
                                   ? Asset.colorPrimary
                                   : Colors.grey),
-                          color: _CDetailShoes.size == index
+                          color: _CDetailApparel.size == index
                               ? Asset.colorAccent
                               : Colors.white,
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          apparel!.sizes[index],
+                          widget.apparel!.sizes[index],
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey,
@@ -263,20 +340,20 @@ class DetaiApparel extends StatelessWidget {
             ),
             Wrap(
               spacing: 8,
-              children: List.generate(apparel!.colors.length, (index) {
+              children: List.generate(widget.apparel!.colors.length, (index) {
                 return Obx(() => GestureDetector(
-                      onTap: () => _CDetailShoes.setColor(index),
+                      onTap: () => _CDetailApparel.setColor(index),
                       child: FittedBox(
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             border: Border.all(
                               width: 2,
-                              color: _CDetailShoes.color == index
+                              color: _CDetailApparel.color == index
                                   ? Asset.colorPrimary
                                   : Colors.grey,
                             ),
-                            color: _CDetailShoes.color == index
+                            color: _CDetailApparel.color == index
                                 ? Asset.colorAccent
                                 : Colors.white,
                           ),
@@ -286,7 +363,7 @@ class DetaiApparel extends StatelessWidget {
                           ),
                           alignment: Alignment.center,
                           child: Text(
-                            apparel!.colors[index],
+                            widget.apparel!.colors[index],
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.grey,
@@ -312,7 +389,7 @@ class DetaiApparel extends StatelessWidget {
               height: 8,
             ),
             Text(
-              apparel!.description!,
+              widget.apparel!.description!,
             ),
             SizedBox(
               height: 30,

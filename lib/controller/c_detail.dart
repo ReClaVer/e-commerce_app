@@ -7,10 +7,10 @@ class CDetailApparel extends GetxController {
   RxInt _size = 0.obs;
   RxInt _color = 0.obs;
 
-  get isWishlist => _isWishlist.value;
-  get quantity => _quantity.value;
-  get size => _size.value;
-  get color => _color.value;
+  bool get isWishlist => _isWishlist.value;
+  int get quantity => _quantity.value;
+  int get size => _size.value;
+  int get color => _color.value;
 
   setIsWishlist(bool newIsWhislist) => _isWishlist.value = newIsWhislist;
   setQuantity(int newQuantity) => _quantity.value = newQuantity;
