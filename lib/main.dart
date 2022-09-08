@@ -1,12 +1,17 @@
 import 'package:ecommerce_app/event/event_pref.dart';
 import 'package:ecommerce_app/page/auth/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'page/dashboard/dashboard.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(new MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -15,14 +20,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Dashboard(),
-      // home: FutureBuilder(
-      //     future: EventPref.getUser(),
-      //     builder: (context, snapshot) {
-      //       if (snapshot.data == null) return Login();
-      //       return Dashboard();
-      //     })
-    );
+        debugShowCheckedModeBanner: false,
+        // home: Dashboard(),
+        home: FutureBuilder(
+            future: EventPref.getUser(),
+            builder: (context, snapshot) {
+              if (snapshot.data == null) return Login();
+              return Dashboard();
+            }));
   }
 }

@@ -30,10 +30,10 @@ class Wishlist {
       idUser: int.parse(json['id_user']),
       name: json['name'],
       rating: double.parse(json['rating']),
-      tags: json['tags'],
+      tags: json['tags'].toString().split(', '),
       price: double.parse(json['price']),
-      sizes: json['sizes'],
-      colors: json['colors'],
+      sizes: json['sizes'].toString().split(', '),
+      colors: json['colors'].toString().split(', '),
       description: json['description'],
       image: json['image']);
 

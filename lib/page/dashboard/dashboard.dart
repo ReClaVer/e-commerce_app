@@ -2,7 +2,7 @@ import 'package:ecommerce_app/controller/c_user.dart';
 import 'package:ecommerce_app/page/dashboard/fragment_home.dart';
 import 'package:ecommerce_app/page/dashboard/fragment_order.dart';
 import 'package:ecommerce_app/page/dashboard/fragment_profile.dart';
-import 'package:ecommerce_app/page/dashboard/fragment_whislist.dart';
+import 'package:ecommerce_app/page/dashboard/fragment_wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -13,7 +13,7 @@ class Dashboard extends StatelessWidget {
   RxInt _index = 0.obs;
   List<Widget> _fragments = [
     FragmentHome(),
-    FragmentWhislist(),
+    FragmentWishlist(),
     FragmentOrder(),
     FragmentProfile(),
   ];

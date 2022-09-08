@@ -128,8 +128,6 @@ class _DetaiApparelState extends State<DetaiApparel> {
                         } else {
                           addWishlist();
                         }
-                        // _CDetailApparel.setIsWishlist(
-                        //     !_CDetailApparel.isWishlist);
                       },
                       icon: Icon(
                           _CDetailApparel.isWishlist

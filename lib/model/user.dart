@@ -15,6 +15,6 @@ class User {
         'id_user': this.idUser.toString(),
         'name': this.name,
         'email': this.email,
-        'password': this.password
+        'password': this.password,
       };
 }
