@@ -1,26 +1,26 @@
 [
     {
-        "merged": "E:\\FlutterProject\\ecommerce_app\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "E:\\FlutterProject\\ecommerce_app\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\build\\app\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\FlutterProject\\ecommerce_app\\build\\app\\intermediates\\merged_res\\debug\\drawable-v21_launch_background.xml.flat",
-        "source": "E:\\FlutterProject\\ecommerce_app\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
+        "merged": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\build\\app\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\FlutterProject\\ecommerce_app\\build\\app\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "E:\\FlutterProject\\ecommerce_app\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\build\\app\\intermediates\\merged_res\\debug\\drawable-v21_launch_background.xml.flat",
+        "source": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
     },
     {
-        "merged": "E:\\FlutterProject\\ecommerce_app\\build\\app\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "E:\\FlutterProject\\ecommerce_app\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\FlutterProject\\ecommerce_app\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "E:\\FlutterProject\\ecommerce_app\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\FlutterProject\\ecommerce_app\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "E:\\FlutterProject\\ecommerce_app\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "F:\\Flutter\\Flutter_Project\\e-commerce_app\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     }
 ]
